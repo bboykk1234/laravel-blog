@@ -2,8 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +29,20 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Passport::routes();
+
+        Auth::viaRequest('email', function (Request $request) {
+            if ($request->get('email')) {
+                return User::where('email', $request->get('email'))->first();
+            }
+
+            if ($request->input('username')) {
+                return User::where('email', $request->input('username'))->first();
+            }
+        });
+
+        Gate::define('isAdmin', function(User $user) {
+            return $user->type === 1;
+         });
     }
 }

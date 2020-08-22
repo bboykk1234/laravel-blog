@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,17 +13,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group(function() {
+    Route::middleware('can:isAdmin')->group(function() {
+        Route::prefix('users')->group(function() {
+            Route::get('/', 'UserController@index');
+        });
+
+        Route::prefix('articles')->group(function() {
+            Route::delete('{id}', 'ArticleController@destroy');
+            Route::post('/', 'ArticleController@store');
+            Route::put('{id}', 'ArticleController@update');
+        });
+
+        Route::prefix('blog')->group(function() {
+            Route::get('/statistics', 'StatisticController@index');
+        });
+    });
+
+    Route::prefix('comments')->group(function() {
+        Route::delete('{id}', 'CommentController@destroy');
+        Route::post('/', 'CommentController@store');
+        Route::put('{id}', 'CommentController@update');
+    });
 });
 
-Route::middleware('guest')->group(function () {
-    Route::prefix('auth')->group(function() {
-        Route::post('register', 'Auth\RegisterController@create');
-    });
+Route::post('register', 'Auth\RegisterController@create');
+Route::prefix('articles')->group(function() {
+    Route::get('/', 'ArticleController@index');
+    Route::get('{id}', 'ArticleController@show');
+});
 
-    Route::middleware('email.verify')->prefix('email')->group(function() {
-        Route::get('verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
-        Route::post('resend', 'Auth\VerificationController@resend')->name('verification.resend');
-    });
+Route::middleware('auth:email')->prefix('email')->group(function() {
+    Route::get('verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
+    Route::post('resend', 'Auth\VerificationController@resend')->name('verification.resend');
 });

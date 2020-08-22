@@ -2,7 +2,12 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
+use Illuminate\Routing\Exceptions\InvalidSignatureException;
+use Illuminate\Validation\UnauthorizedException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -50,6 +55,26 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        switch (true) {
+            case $exception instanceof AuthenticationException:
+                return response()->json([
+                    'errors' => [
+                        'title' => 'Unauthenticated',
+                    ]
+                ], Response::HTTP_UNAUTHORIZED);
+            case $exception instanceof AuthorizationException:
+                return response()->json([
+                    'errors' => [
+                        'title' => 'Unauthorized',
+                    ]
+                ], Response::HTTP_UNAUTHORIZED);
+            case $exception instanceof InvalidSignatureException:
+                return response()->json([
+                    'errors' => [
+                        'title' => 'Invalid signature',
+                    ]
+                ], Response::HTTP_FORBIDDEN);
+        }
         return parent::render($request, $exception);
     }
 }
