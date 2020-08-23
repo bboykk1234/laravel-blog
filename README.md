@@ -27,6 +27,9 @@ MAIL_FROM_NAME="${APP_NAME}"
 ```
 - Then please run the following commands:
 ```
+// Install php packages
+docker run --rm -v $(pwd):/app composer install
+
 // Start the container
 docker-compose up -d
 
