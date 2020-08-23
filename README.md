@@ -315,6 +315,7 @@ Example response:
 		"id":  16
 	}
 }
+- Http status 422 (Validation error)
 - Http status 401 (Unauthorized)
 {
 	"errors":  {
@@ -357,6 +358,7 @@ Example response:
 	}
 }
 - Http status 404 (article not found)
+- Http status 422 (Validation error)
 - Http status 401 (Unauthorized)
 {
 	"errors":  {
@@ -422,6 +424,7 @@ Example response:
 		"id":  34
 	}
 }
+- Http status 422 (Validation error)
 - Http status 401 (Unauthorized)
 {
 	"errors":  {
@@ -462,6 +465,7 @@ Example response:
 		"updated_at":  "2020-08-23T11:26:49.000000Z"
 	}
 }
+- Http status 422 (Validation error)
 - Http status 401 (Unauthorized)
 {
 	"errors":  {
