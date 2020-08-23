@@ -1,4 +1,4 @@
-Cloned from laravel github repository
+Cloned and extended from laravel github repository
 
 ## Prerequisites
 - Docker
