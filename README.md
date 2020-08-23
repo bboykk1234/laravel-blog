@@ -3,19 +3,19 @@
 - mailtrap.io (Verification email will send to this)
 
 ## Getting started
-- Prepare the .env file, make sure you have the following variables:
+- Prepare the .env file (can copy from .env.example), then make sure override the following variables:
 
 ```
-// Must follow
+# Must follow
 DB_CONNECTION=mysql
-// MySQL container name
+# MySQL container name
 DB_HOST=db
 DB_PORT=3306
 DB_DATABASE=laravel
 DB_USERNAME=root
 DB_PASSWORD=test123
 
-// Put your mailtrap.io credential
+# Put your mailtrap.io credential
 MAIL_MAILER=smtp
 MAIL_HOST=
 MAIL_PORT=
