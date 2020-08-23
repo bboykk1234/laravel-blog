@@ -44,6 +44,7 @@ docker-compose exec app php artisan passport:install
 - This app has no UI at all, apis only
 - Using password grant type for laravel passport
 - I built the apis based on the technical test requirements, this app is not a complete app
+- Tested in centos linux
 
 ## APIs Documentation
 - Register api
