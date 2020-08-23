@@ -1,4 +1,4 @@
-﻿## Prerequisite
+﻿## Prerequisites
 - Docker
 - mailtrap.io (Verification email will send to this)
 
@@ -8,15 +8,15 @@
 ```
 // Must follow
 DB_CONNECTION=mysql
-// MySQL container name 
+// MySQL container name
 DB_HOST=db
 DB_PORT=3306
-DB_DATABASE=laravel  
-DB_USERNAME=root  
-DB_PASSWORD=test123  
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=test123
 
-// Put your mailtrap.io credentail
-MAIL_MAILER=smtp  
+// Put your mailtrap.io credential
+MAIL_MAILER=smtp
 MAIL_HOST=
 MAIL_PORT=
 MAIL_USERNAME=
@@ -28,15 +28,15 @@ MAIL_FROM_NAME="${APP_NAME}"
 - Then please run the following commands:
 ```
 // Start the container
-docker-compose up -d  
+docker-compose up -d
 
 // Generate app key so that laravel can run
-docker-compose exec app php artisan key:generate  
+docker-compose exec app php artisan key:generate
 
 // Create tables and put in some dummy data
-docker-compose exec app php artisan migrate:fresh --seed  
+docker-compose exec app php artisan migrate:fresh --seed
 
-// Create oauth clients 
+// Create oauth clients
 docker-compose exec app php artisan passport:install
 ```
 
@@ -89,7 +89,7 @@ Example response:
 ```
 GET /api/verify/{id}/{hash}
 Params:
-- email 
+- email
 - expires
 - signature
 Header:
@@ -105,7 +105,7 @@ Example response:
 }
 ```
 
-- Resend email verification api 
+- Resend email verification api
 ```
 POST /api/resend
 Params:
