@@ -1,4 +1,6 @@
-﻿## Prerequisites
+Cloned from laravel github repository
+
+## Prerequisites
 - Docker
 - mailtrap.io (Verification email will send to this)
 
