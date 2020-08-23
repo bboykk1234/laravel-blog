@@ -25,6 +25,8 @@ class RegisterController extends Controller
 
         $user->sendEmailVerificationNotification();
 
-        return $user;
+        return response()->json([
+            'data' => $user
+        ]);
     }
 }

@@ -29,7 +29,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Passport::routes();
+        Passport::routes(null, ['prefix' => 'api/oauth']);
 
         Auth::viaRequest('email', function (Request $request) {
             if ($request->get('email')) {
